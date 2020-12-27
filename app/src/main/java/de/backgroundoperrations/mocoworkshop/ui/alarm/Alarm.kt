@@ -3,11 +3,10 @@ package de.backgroundoperrations.mocoworkshop.ui.alarm
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.media.AudioManager
 import android.media.MediaPlayer
 
-import android.media.ToneGenerator
 import android.widget.Toast
+import de.backgroundoperrations.mocoworkshop.R
 
 
 class Alarm : BroadcastReceiver() {

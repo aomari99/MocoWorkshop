@@ -1,13 +1,13 @@
-package de.backgroundoperrations.mocoworkshop.ui.slideshow
+package de.backgroundoperrations.mocoworkshop.ui.alarm
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class SlideshowViewModel : ViewModel() {
+class AlarmViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is slideshow Fragment"
+        value = "This is Alarm Fragment"
     }
     val text: LiveData<String> = _text
 }

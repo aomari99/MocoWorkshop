@@ -27,21 +27,6 @@ class HomeFragment : Fragment() {
         homeViewModel =
                 ViewModelProvider(this).get(HomeViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_home, container, false)
-        val activityManager = root.context.getSystemService(ACTIVITY_SERVICE) as ActivityManager?
-
-
-        val maxNum = 100
-        val list = activityManager!!.getRunningServices(maxNum)
-
-        val info = StringBuilder()
-
-        info.append("Services currently running: ${list.size}" )
-        for (i in list.indices) {
-            info.append("${list[i].service}")
-        }
-        val textView: TextView = root.findViewById(R.id.text_home)
-        textView.setMovementMethod(ScrollingMovementMethod())
-        textView.setText(info)
 
         return root
     }

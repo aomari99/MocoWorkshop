@@ -13,13 +13,18 @@
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="de.backgroundoperrations.mocoworkshop.ui.gallery.GalleryFragment"
+        android:name="de.backgroundoperrations.mocoworkshop.ui.work.WorkFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_work" />
 
     <fragment
         android:id="@+id/nav_alarm"
         android:name="de.backgroundoperrations.mocoworkshop.ui.alarm.AlarmFragment"
         android:label="@string/menu_alarm"
         tools:layout="@layout/fragment_alarm" />
+    <fragment
+        android:id="@+id/nav_work"
+        android:name="de.backgroundoperrations.mocoworkshop.ui.work.WorkFragment"
+        android:label="@string/menu_work"
+        tools:layout="@layout/fragment_work" />
 </navigation>

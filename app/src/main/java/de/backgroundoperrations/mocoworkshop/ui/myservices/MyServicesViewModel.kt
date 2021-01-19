@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 
 class MyServicesViewModel : ViewModel() {
     private val _text = MutableLiveData<String>().apply {
-        value = "This is Thread Fragment"
+        value = "This is Service Fragment"
     }
     val text: LiveData<String> = _text
 }

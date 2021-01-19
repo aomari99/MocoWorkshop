@@ -48,13 +48,13 @@ class MyService :Service() {
 
             var charsRead = 0
             val buffer =
-                    CharArray(2024) //choose your buffer size if you need other than 1024
-            val serverAddr = InetAddress.getByName("192.168.50.31");
+                    CharArray(2024) //choose your buffer size if you need other than 1024 val serverAddr = InetAddress.getByName("192.168.50.75");
+            //val client = Socket("192.168.50.75", 1234)
             Log.e("TCP Client", "C: Connecting...");
-            val socket =  Socket(serverAddr, 11000);
+            val socket =  Socket("192.168.50.75",8888);
 
             while(mRun) {
-                val mBufferIn = BufferedReader(InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
+                val mBufferIn = BufferedReader(InputStreamReader(socket.getInputStream(), StandardCharsets.US_ASCII));
 
 
                 charsRead = mBufferIn.read(buffer)

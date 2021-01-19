@@ -18,6 +18,12 @@
         tools:layout="@layout/fragment_work" />
 
     <fragment
+        android:id="@+id/nav_services"
+        android:name="de.backgroundoperrations.mocoworkshop.ui.myservices.MyServicesFragment"
+        android:label="@string/menu_services"
+        tools:layout="@layout/fragment_my_services" />
+
+    <fragment
         android:id="@+id/nav_alarm"
         android:name="de.backgroundoperrations.mocoworkshop.ui.alarm.AlarmFragment"
         android:label="@string/menu_alarm"

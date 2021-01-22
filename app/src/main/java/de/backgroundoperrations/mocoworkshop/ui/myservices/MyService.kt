@@ -19,6 +19,7 @@ import de.backgroundoperrations.mocoworkshop.R
 
 class MyService : Service() {
     //Begleit Objekt
+
     companion object {
         private const val ID = 99
         private const val SERVER = "192.168.50.75"
@@ -33,6 +34,7 @@ class MyService : Service() {
                 Intent(this, MyServicesFragment::class.java).let { notificationIntent ->
                     PendingIntent.getActivity(this, 0, notificationIntent, 0)
                 }
+
 
         val notification: Notification = NotificationCompat.Builder(this, CHANNEL_ID_MY_SERVICE)
                 .setContentTitle("Warten auf helfer")
@@ -58,9 +60,8 @@ class MyService : Service() {
                 if (mServerMessage != null)
                     GlobalScope.launch {
                         shownote(mServerMessage)
-                        Log.e("response", mServerMessage)
+                        Log.i("connectserver", mServerMessage)
                     }
-
             }
 
         }

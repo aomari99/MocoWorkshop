@@ -1,7 +1,6 @@
 package de.backgroundoperrations.mocoworkshop.ui.work
 
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -29,7 +28,7 @@ class WorkFragment : Fragment() {
 
         val root = inflater.inflate(R.layout.fragment_work, container, false)
         val request= OneTimeWorkRequestBuilder<WorkOneTimeRequest>().build()
-        val btnonetime =root.findViewById<Button>(R.id.btnOnetimerequest)
+        val btnonetime =root.findViewById<Button>(R.id.one_time_request_button)
         btnonetime.setOnClickListener {
             WorkManager.getInstance().enqueue(request)
         }

@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import de.backgroundoperrations.mocoworkshop.R
 import android.content.Intent
 import androidx.core.content.ContextCompat
-import java.net.Socket
 
 
 class MyServicesFragment : Fragment() {
@@ -24,7 +23,7 @@ class MyServicesFragment : Fragment() {
         myservicesViewModel =
             ViewModelProvider(this).get(MyServicesViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_my_services, container, false)
-        val conbtn= root.findViewById<Button>(R.id.connbutton)
+        val conbtn= root.findViewById<Button>(R.id.myservice_connection_button)
         conbtn.setOnClickListener() {
 
             val startIntent =Intent(this.context,MyService::class.java)

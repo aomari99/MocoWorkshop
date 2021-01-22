@@ -25,6 +25,8 @@ class WorkFragment : Fragment() {
     ): View? {
         workViewModel =
             ViewModelProvider(this).get(WorkViewModel::class.java)
+
+
         val root = inflater.inflate(R.layout.fragment_work, container, false)
         val request= OneTimeWorkRequestBuilder<WorkOneTimeRequest>().build()
         val btnonetime =root.findViewById<Button>(R.id.btnOnetimerequest)

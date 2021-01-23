@@ -14,7 +14,7 @@
             android:name=".ui.myservices.MyService"
             android:enabled="true"
             android:exported="false"></service>
-
+        <receiver android:name=".ui.alarm.Alarm"/>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"

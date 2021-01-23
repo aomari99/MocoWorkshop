@@ -62,6 +62,7 @@ class MyService : Service() {
                         shownote(mServerMessage)
                         Log.i("connectserver", mServerMessage)
                     }
+
             }
 
         }

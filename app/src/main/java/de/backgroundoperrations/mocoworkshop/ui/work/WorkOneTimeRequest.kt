@@ -9,7 +9,7 @@ import androidx.work.Worker
 import androidx.work.WorkerParameters
 import de.backgroundoperrations.mocoworkshop.R
 
-class WorkOneTimeRequest(context: Context,workerParams: WorkerParameters): Worker(context, workerParams) {
+class WorkOneTimeRequest(context: Context,workerParams: WorkerParameters) : Worker(context, workerParams){
    companion object{
        private const val WORK_MANAGER_CHANNEL_ID="CHANNEL_ID_WORK_MANAGER"
        private const val WORK_MANAGER_CHANNEL_NAME="WORK_MANAGER"

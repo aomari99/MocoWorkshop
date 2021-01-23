@@ -28,6 +28,7 @@ class WorkFragment : Fragment() {
 
         val root = inflater.inflate(R.layout.fragment_work, container, false)
         val request= OneTimeWorkRequestBuilder<WorkOneTimeRequest>().build()
+
         val btnonetime =root.findViewById<Button>(R.id.one_time_request_button)
         btnonetime.setOnClickListener {
             WorkManager.getInstance().enqueue(request)

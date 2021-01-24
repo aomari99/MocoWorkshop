@@ -18,8 +18,11 @@ companion object{
     var counter=0;
 }
     override fun doWork(): Result {
-
-        createNotification("Qurantäne Status","Sie befinden sich noch $tageinquarantaene Tage in Qurantäne")
+        if(tageinquarantaene!=0){
+            createNotification("Qurantäne Status","Sie befinden sich noch $tageinquarantaene Tage in Qurantäne")
+        }else{
+            createNotification("Qurantäne Status","Sie befinden sich ab heute nicht mehr in Qurantäne")
+        }
         counter++
         if(counter==2){
             tageinquarantaene--

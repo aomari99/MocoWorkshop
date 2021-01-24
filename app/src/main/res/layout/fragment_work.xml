@@ -35,7 +35,7 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Falls Sie positiv auf COVID-19 getestet wurden, können Sie den Button betätigen und bekommen alle 12 Stunden eine Benachrichtigung wie lange SIe noch in Qurantäne sind."
+        android:text="Falls Sie positiv auf COVID-19 getestet wurden, können Sie den Button betätigen und bekommen alle 12 Stunden eine Benachrichtigung wie lange Sie noch in Qurantäne sind."
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/one_time_request_button"
         app:layout_constraintEnd_toEndOf="parent"

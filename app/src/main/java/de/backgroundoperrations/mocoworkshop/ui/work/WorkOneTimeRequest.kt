@@ -33,6 +33,7 @@ class WorkOneTimeRequest(context: Context,workerParams: WorkerParameters) : Work
             .setContentTitle(title)
             .setContentText(description)
             .setSmallIcon(R.drawable.ic_launcher_background)
+            .setAutoCancel(true)
 
         notificationManager.notify(1,notificationBuilder.build())
     }

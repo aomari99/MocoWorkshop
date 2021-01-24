@@ -15,16 +15,26 @@ import java.io.InputStreamReader
 import java.net.Socket
 import java.nio.charset.StandardCharsets
 import de.backgroundoperrations.mocoworkshop.R
-
+import kotlinx.coroutines.NonCancellable.cancel
 
 class MyService : Service() {
-    //Begleit Objekt
 
+    //Begleit Objekt
     companion object {
+
+        //Forgroudservice Channel ID
         private const val ID = 99
+
+        //IP-Adresse des Servers in unserem Fall die des eigenen Geräts
         private const val SERVER = "192.168.50.75"
+
+        //Port auf welchem der Server lauscht
         private const val PORT = 8888
+
+        //Nachrichten Channel von myservice
         private const val CHANNEL_ID_MY_SERVICE="myservice"
+
+        //Größe des Buffers für den Nachrichten Empfang
         private const val BUFFERSIZE=2048
     }
 
@@ -35,7 +45,7 @@ class MyService : Service() {
                     PendingIntent.getActivity(this, 0, notificationIntent, 0)
                 }
 
-
+        //Benachrichtung für den User das er mit dem Server Connected ist und auf Antwort einens Users wartet
         val notification: Notification = NotificationCompat.Builder(this, CHANNEL_ID_MY_SERVICE)
                 .setContentTitle("Warten auf helfer")
                 .setContentText("Bitte Warten Sie")
@@ -44,21 +54,28 @@ class MyService : Service() {
                 .setAutoCancel(true)
                 .build()
 
-        startForeground(ID, notification)
+
+        //Starten des Vordergrund Dienstes, Falls dies nicht gestartet wird, wird der Service nach 5 Sekunden beendet
+      startForeground(ID, notification)
         GlobalScope.launch {
             val mRun = true;
 
             var charsRead = 0
-            val buffer = CharArray(BUFFERSIZE) //choose your buffer size if you need other than 1024 val serverAddr = InetAddress.getByName("192.168.50.75");
+            val buffer = CharArray(BUFFERSIZE)
             Log.e("TCP Client", "C: Connecting...");
+          //Erstellen des Socket mit der im Companion Objekt angelegten IP und dem Port
             val socket = Socket(SERVER, PORT);
             while (mRun) {
+                //Einlesen der gesendeten Daten vom C TCP-Server
                 val mBufferIn = BufferedReader(InputStreamReader(socket.getInputStream(), StandardCharsets.US_ASCII));
 
                 charsRead = mBufferIn.read(buffer)
+
+                //Umwandeln der empfangenen Daten in einen String
                 val mServerMessage: String? = String(buffer).substring(0, charsRead)
                 if (mServerMessage != null)
                     GlobalScope.launch {
+                        //Ausführen der Notification das ein Helfer gefunden wurde, mit übergabe des Namens
                         shownote(mServerMessage)
                         Log.i("connectserver", mServerMessage)
                     }
@@ -76,17 +93,16 @@ class MyService : Service() {
                 .setContentTitle("Helfer gefunden")
                 .setContentText("$string würde gerne ihren Einkauf erledigen")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setAutoCancel(true)
         with(NotificationManagerCompat.from(this)) {
-            // notificationId is a unique int for each notification that you must define
-            //id++;
+
+            //Benachrichten des Clients
             notify(ID, builder.build())
 
         }
     }
-
+    //Erstellen des Notification Channels
     private fun createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = ("myservicetest")
             val descriptionText = "myservice"
@@ -101,13 +117,15 @@ class MyService : Service() {
         }
     }
 
+
     override fun onBind(intent: Intent): IBinder {
         TODO("Return the communication channel to the service.")
     }
 
     override fun onDestroy() {
         Intent(this, MyService::class.java).also { intent ->
-            startService(intent)
+            stopService(intent)
+
         }
     }
 

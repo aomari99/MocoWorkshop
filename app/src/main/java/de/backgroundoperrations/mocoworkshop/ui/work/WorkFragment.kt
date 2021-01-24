@@ -9,8 +9,10 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import de.backgroundoperrations.mocoworkshop.R
+import java.util.concurrent.TimeUnit
 
 
 class WorkFragment : Fragment() {
@@ -28,10 +30,14 @@ class WorkFragment : Fragment() {
 
         val root = inflater.inflate(R.layout.fragment_work, container, false)
         val request= OneTimeWorkRequestBuilder<WorkOneTimeRequest>().build()
+        val request2= PeriodicWorkRequestBuilder<WorkPeriodical>(15,TimeUnit.MINUTES).build()
+        val workManageronetime= WorkManager.getInstance(root.context)
+        val workManagerperiodical=WorkManager.getInstance(root.context)
 
         val btnonetime =root.findViewById<Button>(R.id.one_time_request_button)
         btnonetime.setOnClickListener {
-            WorkManager.getInstance().enqueue(request)
+            workManageronetime.enqueue(request)
+            workManagerperiodical.enqueue(request2)
         }
 
         return root

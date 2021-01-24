@@ -49,7 +49,7 @@ class MyService : Service() {
         val notification: Notification = NotificationCompat.Builder(this, CHANNEL_ID_MY_SERVICE)
                 .setContentTitle("Warten auf helfer")
                 .setContentText("Bitte Warten Sie")
-                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setSmallIcon(R.drawable.ic_menu_message)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)
                 .build()
@@ -89,7 +89,7 @@ class MyService : Service() {
     fun shownote(string: String) {
 
         val builder = NotificationCompat.Builder(this, CHANNEL_ID_MY_SERVICE)
-                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setSmallIcon(R.drawable.ic_menu_message)
                 .setContentTitle("Helfer gefunden")
                 .setContentText("$string würde gerne ihren Einkauf erledigen")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)

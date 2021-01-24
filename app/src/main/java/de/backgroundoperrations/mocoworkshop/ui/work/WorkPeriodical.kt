@@ -6,6 +6,7 @@ import android.content.Context
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import androidx.work.WorkManager
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import de.backgroundoperrations.mocoworkshop.R
@@ -14,7 +15,7 @@ class WorkPeriodical(context: Context, workerParams: WorkerParameters) : Worker(
 companion object{
     private const val WORK_MANAGER_PERIODIC_CHANNEL_ID= "CHANNEL_ID_WORK_MANAGER_PERIODICAL"
     private const val WORK_MANAGER_PERIODICAL_CHANNEL_NAME="WORK_MANAGER_PERIODICAL"
-    var tageinquarantaene=14
+    var tageinquarantaene=1
     var counter=0;
 }
     override fun doWork(): Result {
@@ -22,9 +23,10 @@ companion object{
             createNotification("Qurantäne Status","Sie befinden sich noch $tageinquarantaene Tage in Qurantäne")
         }else{
             createNotification("Qurantäne Status","Sie befinden sich ab heute nicht mehr in Qurantäne")
+            WorkFragment.workmanager.cancelAllWork()
         }
         counter++
-        if(counter==2){
+        if(counter==1){
             tageinquarantaene--
             counter=0
         }
@@ -45,7 +47,7 @@ companion object{
         val notificationBuilder = NotificationCompat.Builder(applicationContext, WORK_MANAGER_PERIODIC_CHANNEL_ID)
                 .setContentTitle(title)
                 .setContentText(description)
-                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setSmallIcon(R.drawable.ic_menu_work)
 
         notificationManager.notify(2, notificationBuilder.build())
     }

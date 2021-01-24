@@ -5,14 +5,15 @@ import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import androidx.core.app.NotificationCompat
+import androidx.work.WorkManager
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import de.backgroundoperrations.mocoworkshop.R
-
 class WorkOneTimeRequest(context: Context,workerParams: WorkerParameters) : Worker(context, workerParams){
    companion object{
        private const val WORK_MANAGER_CHANNEL_ID="CHANNEL_ID_WORK_MANAGER"
        private const val WORK_MANAGER_CHANNEL_NAME="WORK_MANAGER"
+
    }
 
     override fun doWork(): Result {
@@ -32,7 +33,7 @@ class WorkOneTimeRequest(context: Context,workerParams: WorkerParameters) : Work
         val notificationBuilder= NotificationCompat.Builder(applicationContext, WORK_MANAGER_CHANNEL_ID)
             .setContentTitle(title)
             .setContentText(description)
-            .setSmallIcon(R.drawable.ic_launcher_background)
+            .setSmallIcon(R.drawable.ic_menu_work)
             .setAutoCancel(true)
 
         notificationManager.notify(1,notificationBuilder.build())

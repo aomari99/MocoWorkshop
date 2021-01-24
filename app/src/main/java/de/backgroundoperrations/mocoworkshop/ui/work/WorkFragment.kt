@@ -16,9 +16,12 @@ import java.util.concurrent.TimeUnit
 
 
 class WorkFragment : Fragment() {
+    companion object{
+        lateinit var workmanager :WorkManager
+    }
+
 
     private lateinit var workViewModel: WorkViewModel
-
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -31,13 +34,12 @@ class WorkFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_work, container, false)
         val request= OneTimeWorkRequestBuilder<WorkOneTimeRequest>().build()
         val request2= PeriodicWorkRequestBuilder<WorkPeriodical>(15,TimeUnit.MINUTES).build()
-        val workManageronetime= WorkManager.getInstance(root.context)
-        val workManagerperiodical=WorkManager.getInstance(root.context)
+        workmanager=WorkManager.getInstance(root.context)
 
         val btnonetime =root.findViewById<Button>(R.id.one_time_request_button)
         btnonetime.setOnClickListener {
-            workManageronetime.enqueue(request)
-            workManagerperiodical.enqueue(request2)
+            workmanager.enqueue(request)
+            workmanager.enqueue(request2)
         }
 
         return root

@@ -32,14 +32,22 @@ class WorkFragment : Fragment() {
 
 
         val root = inflater.inflate(R.layout.fragment_work, container, false)
-        val request= OneTimeWorkRequestBuilder<WorkOneTimeRequest>().build()
+   //     val constraints= Constraints.Builder().setRequiresCharging(true).build()
+        val request= OneTimeWorkRequestBuilder<WorkOneTimeRequest>()
+          //      .setConstraints(constraints)
+                .build()
         val request2= PeriodicWorkRequestBuilder<WorkPeriodical>(15,TimeUnit.MINUTES).build()
         workmanager=WorkManager.getInstance(root.context)
 
-        val btnonetime =root.findViewById<Button>(R.id.one_time_request_button)
-        btnonetime.setOnClickListener {
+        val workmanagerbtn =root.findViewById<Button>(R.id.startworkmanager_button)
+        val cancelbutton = root.findViewById<Button>(R.id.workmanagercancel_button)
+        workmanagerbtn.setOnClickListener {
             workmanager.enqueue(request)
             workmanager.enqueue(request2)
+        }
+
+        cancelbutton.setOnClickListener{
+            workmanager.cancelAllWork()
         }
 
         return root

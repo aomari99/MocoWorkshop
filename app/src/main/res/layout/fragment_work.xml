@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />-->
 
     <Button
-        android:id="@+id/one_time_request_button"
+        android:id="@+id/startworkmanager_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ich bin in Qurantäne"
@@ -37,8 +37,18 @@
         android:layout_height="wrap_content"
         android:text="Falls Sie positiv auf COVID-19 getestet wurden, können Sie den Button betätigen und bekommen alle 12 Stunden eine Benachrichtigung wie lange Sie noch in Qurantäne sind."
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/one_time_request_button"
+        app:layout_constraintBottom_toTopOf="@+id/startworkmanager_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/workmanagercancel_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ich bin nicht mehr in Qurantäne"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/startworkmanager_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>

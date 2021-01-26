@@ -15,7 +15,7 @@ class WorkPeriodical(context: Context, workerParams: WorkerParameters) : Worker(
 companion object{
     private const val WORK_MANAGER_PERIODIC_CHANNEL_ID= "CHANNEL_ID_WORK_MANAGER_PERIODICAL"
     private const val WORK_MANAGER_PERIODICAL_CHANNEL_NAME="WORK_MANAGER_PERIODICAL"
-    var tageinquarantaene=1
+    var tageinquarantaene=14
     var counter=0;
 }
     override fun doWork(): Result {

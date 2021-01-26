@@ -28,10 +28,10 @@ class MyService : Service() {
         private const val ID = 99
 
         //IP-Adresse des Servers in unserem Fall die des eigenen Geräts
-        private val SERVER = "t45xvxe1amipu7ef.myfritz.net"
+        private val SERVER = "192.168.178.31"
 
         //Port auf welchem der Server lauscht
-        private const val PORT = 8889
+        private const val PORT = 8888
 
         //Nachrichten Channel von myservice
         private const val CHANNEL_ID_MY_SERVICE="myservice"

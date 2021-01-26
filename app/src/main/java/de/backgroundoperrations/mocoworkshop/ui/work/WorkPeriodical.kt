@@ -23,6 +23,8 @@ companion object{
             createNotification("Qurantäne Status","Sie befinden sich noch $tageinquarantaene Tage in Qurantäne")
         }else{
             createNotification("Qurantäne Status","Sie befinden sich ab heute nicht mehr in Qurantäne")
+            tageinquarantaene=14
+            counter=0
             WorkFragment.workmanager.cancelAllWork()
         }
         counter++

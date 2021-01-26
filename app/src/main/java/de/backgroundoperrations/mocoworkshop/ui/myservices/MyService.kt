@@ -8,16 +8,16 @@ import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.Socket
 import java.nio.charset.StandardCharsets
 import de.backgroundoperrations.mocoworkshop.R
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.*
+import java.util.*
 import kotlinx.coroutines.NonCancellable.cancel
+import java.net.InetAddress
+import java.net.ServerSocket
 
 class MyService : Service() {
 
@@ -28,10 +28,10 @@ class MyService : Service() {
         private const val ID = 99
 
         //IP-Adresse des Servers in unserem Fall die des eigenen Geräts
-        private const val SERVER = "192.168.50.77"
+        private val SERVER = "192.168.50.77"
 
         //Port auf welchem der Server lauscht
-        private const val PORT = 8888
+        private const val PORT = 8889
 
         //Nachrichten Channel von myservice
         private const val CHANNEL_ID_MY_SERVICE="myservice"
@@ -46,7 +46,7 @@ class MyService : Service() {
                 Intent(this, MyServicesFragment::class.java).let { notificationIntent ->
                     PendingIntent.getActivity(this, 0, notificationIntent, 0)
                 }
-
+        Log.i("Hostname", "$SERVER")
         //Benachrichtung für den User das er mit dem Server Connected ist und auf Antwort einens Users wartet
         val notification: Notification = NotificationCompat.Builder(this, CHANNEL_ID_MY_SERVICE)
                 .setContentTitle("Warten auf helfer")
@@ -58,10 +58,12 @@ class MyService : Service() {
 
 
         //Starten des Vordergrund Dienstes, Falls dies nicht gestartet wird, wird der Service nach 5 Sekunden beendet
-      startForeground(ID, notification)
-        CoroutineScope(Dispatchers.IO).launch {
-            val mRun = true;
+        startForeground(ID, notification)
 
+
+        CoroutineScope(Dispatchers.IO).launch {
+        //    delay(6000)
+            val mRun = true;
             var charsRead = 0
             val buffer = CharArray(BUFFERSIZE)
             Log.e("TCP Client", "C: Connecting...");

@@ -28,6 +28,7 @@ class MyServicesFragment : Fragment() {
 
             val startIntent =Intent(this.context,MyService::class.java)
             ContextCompat.startForegroundService(root.context,startIntent)
+            //this.context?.startService(startIntent)
 
         }
 

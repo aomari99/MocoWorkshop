@@ -8,6 +8,7 @@ import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.Socket
@@ -21,7 +22,7 @@ class MyService : Service() {
     companion object {
 
         //Forgroudservice Channel ID
-        private const val ID = 99
+        private  var ID = 99
        // t45xvxe1amipu7ef.myfritz.net
         //IP-Adresse des Servers in unserem Fall die des eigenen Geräts
         private val SERVER = "192.168.50.81"
@@ -49,7 +50,6 @@ class MyService : Service() {
                 .setContentText("Bitte Warten Sie")
                 .setSmallIcon(R.drawable.ic_menu_message)
                 .setContentIntent(pendingIntent)
-                .setAutoCancel(true)
                 .build()
 
 
@@ -61,7 +61,7 @@ class MyService : Service() {
         //    delay(6000)
             val mRun = true;
             var charsRead = 0
-            val buffer = CharArray(BUFFERSIZE)
+            var buffer = CharArray(BUFFERSIZE)
             Log.e("TCP Client", "C: Connecting...");
           //Erstellen des Socket mit der im Companion Objekt angelegten IP und dem Port
             val socket = Socket(SERVER, PORT);
@@ -70,11 +70,12 @@ class MyService : Service() {
                 val mBufferIn = BufferedReader(InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
 
                 charsRead = mBufferIn.read(buffer)
-
+                if(charsRead<0) continue
                 //Umwandeln der empfangenen Daten in einen String
                 val mServerMessage: String? = String(buffer).substring(0, charsRead)
+                buffer= CharArray(BUFFERSIZE)
                 if (mServerMessage != null)
-                    GlobalScope.launch {
+                    CoroutineScope(Dispatchers.IO).launch {
                         //Ausführen der Notification das ein Helfer gefunden wurde, mit übergabe des Namens
                         shownote(mServerMessage)
                         Log.i("connectserver", mServerMessage)
@@ -93,12 +94,11 @@ class MyService : Service() {
                 .setContentTitle("Helfer gefunden")
                 .setContentText("$string würde gerne ihren Einkauf erledigen")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setAutoCancel(true)
         with(NotificationManagerCompat.from(this)) {
 
             //Benachrichten des Clients
             notify(ID, builder.build())
-
+            ID++
         }
     }
     //Erstellen des Notification Channels

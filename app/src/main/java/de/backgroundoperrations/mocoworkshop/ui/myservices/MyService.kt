@@ -14,10 +14,6 @@ import java.net.Socket
 import java.nio.charset.StandardCharsets
 import de.backgroundoperrations.mocoworkshop.R
 import kotlinx.coroutines.*
-import java.util.*
-import kotlinx.coroutines.NonCancellable.cancel
-import java.net.InetAddress
-import java.net.ServerSocket
 
 class MyService : Service() {
 
@@ -26,12 +22,12 @@ class MyService : Service() {
 
         //Forgroudservice Channel ID
         private const val ID = 99
-
+       // t45xvxe1amipu7ef.myfritz.net
         //IP-Adresse des Servers in unserem Fall die des eigenen Geräts
-        private val SERVER = "t45xvxe1amipu7ef.myfritz.net"
+        private val SERVER = "192.168.50.81"
 
         //Port auf welchem der Server lauscht
-        private const val PORT = 8889
+        private const val PORT = 8888
 
         //Nachrichten Channel von myservice
         private const val CHANNEL_ID_MY_SERVICE="myservice"
@@ -71,7 +67,7 @@ class MyService : Service() {
             val socket = Socket(SERVER, PORT);
             while (mRun) {
                 //Einlesen der gesendeten Daten vom C TCP-Server
-                val mBufferIn = BufferedReader(InputStreamReader(socket.getInputStream(), StandardCharsets.US_ASCII));
+                val mBufferIn = BufferedReader(InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
 
                 charsRead = mBufferIn.read(buffer)
 

@@ -43,7 +43,7 @@ class AlarmFragment : Fragment() {
             ).show()
             Toast.makeText(
                 root.context,
-                "Der Alarm kommt in ${times(time.hour, time.minute)}  sekuden ",
+                "Der Alarm kommt in ${times(time.hour, time.minute) /1000}  sekuden ",
                 Toast.LENGTH_LONG
             ).show()
 
@@ -56,7 +56,8 @@ class AlarmFragment : Fragment() {
             alarmManager[AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + times(
                 time.hour,
                 time.minute
-            ) * 1000] = pendingIntent
+            ) ] = pendingIntent
+
 
         }
         return root
@@ -72,8 +73,8 @@ class AlarmFragment : Fragment() {
 
         var diff = abs(t1.time - t2.time)
 
-        val s = (diff / 1000)
-        return s
+
+        return diff
     }
 
     fun getDD(num: Int): String? {

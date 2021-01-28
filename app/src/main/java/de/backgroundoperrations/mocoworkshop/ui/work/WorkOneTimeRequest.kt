@@ -5,18 +5,19 @@ import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import androidx.core.app.NotificationCompat
+import androidx.work.CoroutineWorker
 import androidx.work.WorkManager
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import de.backgroundoperrations.mocoworkshop.R
-class WorkOneTimeRequest(context: Context,workerParams: WorkerParameters) : Worker(context, workerParams){
+class WorkOneTimeRequest(context: Context,workerParams: WorkerParameters) : CoroutineWorker(context, workerParams){
    companion object{
        private const val WORK_MANAGER_CHANNEL_ID="CHANNEL_ID_WORK_MANAGER"
        private const val WORK_MANAGER_CHANNEL_NAME="WORK_MANAGER"
 
    }
 
-    override fun doWork(): Result {
+    override suspend fun doWork(): Result {
         createNotification("Einweisung in Quarantäne","Sie befinden sich ab sofort in Quarantäne")
         return Result.success()
     }

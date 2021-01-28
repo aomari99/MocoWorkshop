@@ -5,20 +5,22 @@ import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import android.util.Log
+import androidx.core.app.CoreComponentFactory
 import androidx.core.app.NotificationCompat
+import androidx.work.CoroutineWorker
 import androidx.work.WorkManager
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import de.backgroundoperrations.mocoworkshop.R
 
-class WorkPeriodical(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
+class WorkPeriodical(context: Context, workerParams: WorkerParameters) : CoroutineWorker(context, workerParams) {
 companion object{
     private const val WORK_MANAGER_PERIODIC_CHANNEL_ID= "CHANNEL_ID_WORK_MANAGER_PERIODICAL"
     private const val WORK_MANAGER_PERIODICAL_CHANNEL_NAME="WORK_MANAGER_PERIODICAL"
     var tageinquarantaene=14
     var counter=0;
 }
-    override fun doWork(): Result {
+   override suspend fun doWork(): Result {
         if(tageinquarantaene!=0){
             createNotification("Qurantäne Status","Sie befinden sich noch $tageinquarantaene Tage in Qurantäne")
         }else{

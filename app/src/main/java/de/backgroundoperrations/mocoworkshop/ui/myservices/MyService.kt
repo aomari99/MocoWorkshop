@@ -25,7 +25,7 @@ class MyService : Service() {
         private  var ID = 99
        // t45xvxe1amipu7ef.myfritz.net
         //IP-Adresse des Servers in unserem Fall die des eigenen Geräts
-        private val SERVER = "192.168.50.81"
+        private val SERVER = "t45xvxe1amipu7ef.myfritz.net"
 
         //Port auf welchem der Server lauscht
         private const val PORT = 8888
